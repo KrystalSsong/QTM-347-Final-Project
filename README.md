@@ -52,9 +52,24 @@ To frame our investigation as a business problem, we transformed it into a class
 ### Regression
 We developed two predictive regression models: a Decision Tree Regressor and a Random Forest Regressor. For the Decision Tree model, the optimal complexity level was determined to be 3.2009e-05, resulting in a training Mean Squared Error (MSE) of 0.002632 and a test MSE of 0.002515. The low MSE values achieved by the Decision Tree Regressor indicate its strong performance. Furthermore, the slight increase in MSE from the training to the test set suggests effective generalization. This optimal level of complexity reflects a balanced model that successfully avoids overfitting while accurately capturing the key patterns in the data.
 
-
+The Random Forest Regressor functions by building numerous decision trees during training and delivering an average of these trees' predictions, yielding a more precise and stable forecast than a single decision tree. We determined the optimal configuration to include 237 trees and to consider 9 features at each split. This model achieved a remarkably low training Mean Squared Error (MSE) of 0.000323 and a test MSE of 0.002172. Such a low training MSE is characteristic of Random Forests, as they typically diminish variance through the averaging process. Notably, the test MSE is lower than that of the Decision Tree Regressor, signifying superior generalization capabilities when applied to new, unseen data. This underscores the Random Forest Regressor's robustness and effectiveness in predictive modeling.
 
 ### Classification
+To more easily calculate the economic scale of the models, we shift to classification problems of predicting binary outcomes. We set the threshold as 0.1 because of the Holders in Due Course. Also, according to the distribution of default rate, 0.1 will make two classes equally distributed so we don’t need to handle oversampling or undersampling.
+
+The first model we used is the logistic regression to predict the probability of default rate > 0.1. We got a training accuracy equal to 0.757782 and a test accuracy equal to 0.732365. 
+
+Our second model, decision tree, is powerful for modelling complex, non-linear relationships. The optimal depth is 6 with the training accuracy of 0.796917 and the test accuracy of 0.751037. The Decision Tree model shows a tendency to overfit since the training accuracy is significantly higher than the test accuracy. Despite the overfitting, it still outperforms the Logistic Regression on the training set due to its non-linear nature, but it slightly underperforms on the test set. 
+![DTC](https://github.com/KrystalSsong/QTM-347-Final-Project/assets/63956791/35ab1968-0b67-437e-80aa-c9bdfe9508e6)
+
+The last model, Random Forest Classifier, is particularly well-suited for our situation, since we have large datasets with relatively high dimensionality. The optimal number of trees is 162, and the optimal max_features is 5. The training accuracy is 0.832790, and the test accuracy is 0.781466. The Random Forest outperforms both the Logistic Regression and the Decision Tree in terms of accuracy on the test set. This indicates that the ensemble method, which builds upon the Decision Tree model, is more effective at generalising from the training data to unseen data.
+
+The confusion matrix presented compares the performance of a Decision Tree classifier and a Random Forest classifier on a test sample of 1446 issued loans. 
+Accuracy: Both models are reasonably accurate in predicting 'Non-Default', but the Random Forest has a higher number of True Positives (306 vs. 256), which suggests it is better at correctly identifying 'Default' cases.
+
+Precision: Precision (the number of True Positives divided by the number of True Positives and False Positives) is higher for the Decision Tree for predicting 'Default' (256/(256+115)) compared to the Random Forest (306/(306+121)). However, this difference is small.
+Recall: Recall (the number of True Positives divided by the number of True Positives and False Negatives) is notably higher for the Random Forest (306/(306+195)) compared to the Decision Tree (256/(256+245)), indicating the Random Forest is less likely to miss 'Default' cases.
+False Positives and False Negatives: The Random Forest has slightly fewer False Positives but significantly fewer False Negatives, indicating it is more conservative about predicting 'Default' and is better at identifying actual 'Default' cases.
 
 
 ## Limitations
