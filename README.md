@@ -61,7 +61,9 @@ Comparative analysis revealed that both PCR and PLS produced higher mean squared
 
 ### Regression
 We developed two predictive regression models: a Decision Tree Regressor and a Random Forest Regressor. For the Decision Tree model, the optimal complexity level was determined to be 3.2009e-05, resulting in a training Mean Squared Error (MSE) of 0.002632 and a test MSE of 0.002515. The low MSE values achieved by the Decision Tree Regressor indicate its strong performance. Furthermore, the slight increase in MSE from the training to the test set suggests effective generalization. This optimal level of complexity reflects a balanced model that successfully avoids overfitting while accurately capturing the key patterns in the data.
+
 ![DTR](https://github.com/KrystalSsong/QTM-347-Final-Project/assets/63956791/de536c67-ceef-4f51-98f6-aaadb2f9e19e)
+
 The Random Forest Regressor functions by building numerous decision trees during training and delivering an average of these trees' predictions, yielding a more precise and stable forecast than a single decision tree. We determined the optimal configuration to include 237 trees and to consider 9 features at each split. This model achieved a remarkably low training Mean Squared Error (MSE) of 0.000323 and a test MSE of 0.002172. Such a low training MSE is characteristic of Random Forests, as they typically diminish variance through the averaging process. Notably, the test MSE is lower than that of the Decision Tree Regressor, signifying superior generalization capabilities when applied to new, unseen data. This underscores the Random Forest Regressor's robustness and effectiveness in predictive modeling.
 
 ### Classification
