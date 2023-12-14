@@ -49,6 +49,9 @@ To frame our investigation as a business problem, we transformed it into a class
 ## Results
 ### Feature Selection
 
+![Lasso_coefficients](https://github.com/KrystalSsong/QTM-347-Final-Project/assets/63956791/f67d4c56-0819-4b08-916d-ee0c77f614fd)
+
+
 
 ### Regression
 We developed two predictive regression models: a Decision Tree Regressor and a Random Forest Regressor. For the Decision Tree model, the optimal complexity level was determined to be 3.2009e-05, resulting in a training Mean Squared Error (MSE) of 0.002632 and a test MSE of 0.002515. The low MSE values achieved by the Decision Tree Regressor indicate its strong performance. Furthermore, the slight increase in MSE from the training to the test set suggests effective generalization. This optimal level of complexity reflects a balanced model that successfully avoids overfitting while accurately capturing the key patterns in the data.
