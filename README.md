@@ -1,4 +1,5 @@
 # Predictions of Cohort Loan Default Rates Based on ML Models
+Authors: Sigrid Liu, Jenny Zhang, Krystal Song, Christina Li
 
 ## Abstract
 This project investigates the default rates of student loans within two years of graduation using the "Most-Recent-Cohorts-Institution" dataset. The analysis focuses on variables such as institution type, student demographics, academic factors, and environmental conditions, chosen for their relevance and significant correlation with loan default rates. We employ a combination of, forward selection, and lasso regression for feature selection, alongside decision tree and random forest regressor for predictive modelling. Additionally, classification techniques like decision trees and random forests are used to identify key patterns. The study aims to provide insights useful for policymakers and educational institutions in developing strategies to mitigate loan default risks.
@@ -15,6 +16,9 @@ Understanding the factors that lead to loan defaults can provide critical insigh
 To tackle this problem, we propose a multifaceted analytical approach using forward selection and lasso regression for feature selection, supplemented by decision tree and random forest regressor for predictive modelling. Additionally, we employ decision trees and random forest classifiers for classification purposes. This approach is advantageous as it combines the strength of various techniques: decision trees for their interpretability and ability to handle non-linear relationships, lasso regression for its efficacy in feature reduction and handling overfitting, and PLS regression for its ability to deal with multicollinearity in predictor variables. Logistic regression provides a robust framework for predicting categorical outcomes and control overfitting. Decision trees classifier offers a simple and interpretable structure for decision-making, requiring little data preparation and effectively handling both numerical and categorical data, while random forests classifier generates high accuracy by aggregating results from multiple decision trees, thus preventing overfitting and handling unbalanced datasets effectively. Our approach differs from traditional linear methods by incorporating a more nuanced analysis that can capture complex patterns within the data. Key components of our methodology include a comprehensive data preprocessing phase, rigorous feature selection to identify the most influential variables, and a combination of predictive models to capture different aspects of the data. However, this approach has limitations, such as the potential for overfitting in decision trees and the sensitivity of lasso regression to the choice of tuning parameters. Moreover, our models' predictive accuracy is contingent on the representativeness and quality of the dataset used.
 
 ## Setup
+### Problem Setup
+For this project, the main problem setup revolves around predicting the likelihood of cohort student loan defaults based on various institutional and student-related factors. The response variable is the default rate for each institution, and the predictors include institution type, student demographics, academic factors, and others. The data will be split into training and test sets, ensuring a representative sample for model training and validation. The models will be evaluated based on their accuracy and precision, among other metrics, to ensure robustness and reliability in predictions. The experimental setup is designed to provide a comprehensive and in-depth analysis of the factors leading to student loan defaults, offering valuable insights for stakeholders in the education sector.
+
 ### Dataset
 The dataset Most-Recent-Cohorts-Institution is an extensive compilation of data provided by the U.S. Department of Education. It is highly detailed and multifaceted, and contains 6,543 observations, detailing institutional characteristics, enrollment, student aid, costs, and student outcomes. The scale and diversity of variables provide insights into aspects like student demographics, academic offerings, institutional characteristics, student financials and loan default rates.
 
@@ -30,7 +34,44 @@ Correlation analysis between various features and the default rate brought to li
 
 On the flip side, MD_EARN_WNE_MALE0_P8, capturing the median earnings of female graduates who are employed and not enrolled in further studies after eight years, showed a strong negative correlation with the default rate. The higher median earnings are indicative of better financial well-being among graduates, which in turn correlates with a lower propensity for loan default.
 
+![Correlation](https://github.com/KrystalSsong/QTM-347-Final-Project/assets/63956791/6d769d28-9e7e-44da-94e6-80fc53878ffb)
+
+## Model Selection
+### Feature Selection
+Faced with a dataset of over 300 features, we tried three main models for feature selection to distill our extensive feature set into a more manageable and significant subset, which is crucial for developing robust predictive models. We started with a decision tree regressor to identify key variables through its feature importance ranking. We also applied forward selection to incrementally build a model, focusing on the most impactful features. Besides, we also used Lasso regression, known for its effectiveness in reducing feature redundancy by shrinking less important feature coefficients to zero. After comparing MSE and features selected, we decided to use features selected by Lasso. 
+
+### Regression
+We then employed a decision tree and random forest regressor to predict the cohort default rate due to their effectiveness in handling complex, high-dimensional data. The Decision Tree regressor provides a straightforward, interpretable model, making it easier to understand how each feature influences the default rate. However, it can be prone to overfitting, especially with a large number of features. To counter this, we employed the Random Forest regressor, an ensemble method that aggregates multiple decision trees to improve prediction accuracy and robustness. Random Forest is particularly adept at managing overfitting while still handling a large feature set effectively. This combination of models allowed us to capture the nuances of our extensive dataset and generate reliable predictions of default rates.
+
+### Classification
+To frame our investigation as a business problem, we transformed it into a classification task, focusing on determining if an institution poses a high risk (1) or not (0), based on its cohort default rate. We set the risk threshold at 10%, guided by the Holders in Due Course principle. This threshold choice is also substantiated by the default rate distribution in our dataset, where about half of the data records a default rate around 8%. Such a threshold ensures a balanced distribution between the two classes (high risk and low risk), thereby obviating the need for techniques like over- or under-sampling that are typically employed to address class imbalance. This approach allows for a more straightforward and effective application of classification algorithms in predicting institutional risk. We would like to use decision tree and random forest classifier here. 
+
+## Results
+### Feature Selection
+
+### Regression
+We developed two predictive regression models: a Decision Tree Regressor and a Random Forest Regressor. For the Decision Tree model, the optimal complexity level was determined to be 3.2009e-05, resulting in a training Mean Squared Error (MSE) of 0.002632 and a test MSE of 0.002515. The low MSE values achieved by the Decision Tree Regressor indicate its strong performance. Furthermore, the slight increase in MSE from the training to the test set suggests effective generalization. This optimal level of complexity reflects a balanced model that successfully avoids overfitting while accurately capturing the key patterns in the data.
 
 
+
+### Classification
+
+
+## Limitations
+Our study faces several limitations that may impact the comprehensiveness and applicability of its findings. One of the key constraints is the lack of economic factors such as rent prices and home prices, which can be important variables influencing post-graduation income and employment. These factors directly reflect the students’ abilities to repay their debt. Furthermore, dropping numerous variables due to excessive missing data (NAs) potentially omits critical information that could have provided a more holistic understanding of the students' economic outcomes. Additionally, the dataset's structure, centred around institutions rather than individual students, limits the granularity of the analysis, potentially overlooking student-specific factors that affect their economic prospects. A significant limitation also arises from the dataset's exclusive inclusion of students who were approved for loans, omitting those who were denied. This exclusion could skew the results, as the financial backgrounds and subsequent career trajectories of students who do not receive loans might differ substantially from those who do. Overall, these limitations suggest that while the study can offer valuable insights, its findings should be interpreted with an understanding of these constraints and the potential for unaccounted variables impacting the outcomes.
+
+## Discussion
+### Who defaults on student loans? Findings from the National Postsecondary Student Aid Study - ScienceDirect
+The analysis of the National Postsecondary Student Aid Study Supplement Loan Recipients Survey (NPSASSLRS) data presents several key findings regarding student loan defaults. The study reveals that borrowers from low-income households, minority groups, high school dropouts, those who do not complete their postsecondary programs, and attendees of proprietary schools and two-year colleges are more prone to defaulting on their loan payments. 
+
+### Project MUSE - College on Credit: A Multilevel Analysis of Student Loan Default
+The study provides a comprehensive analysis of the factors contributing to student loan defaults, emphasizing the significant role of institutional context. It finds that students attending for-profit colleges are more likely to default on their loans compared to those in other higher education sectors, even after controlling for various individual characteristics. Factors such as the type of institution attended, degree completion, and post-college employment are more crucial in determining default status. Individual-level characteristics also play a role; students from upper-income families or non-first-generation students have lower odds of defaulting. Conversely, lower-income students, minoritized students, and students with dependents face higher default risks.
+
+Although these research studies' used datasets are based on individual students instead of by institutions like our dataset, we all reached an agreement in terms of important factors that impact student loan default rates.
+
+### Data Ethics
+We chose a lasso regression model with a reduced feature set, partly guided by considerations of data ethics. While race emerged as a significant predictor, we consciously avoided using it to prevent our model from perpetuating racial biases. It's essential to ensure that minorities are not disadvantaged in educational opportunities, such as receiving student loans and accessing college education. Additionally, historical data often carry inherent biases, and a more regularized model, like lasso regression, helps in generalizing the model better by focusing on less discriminatory and more relevant predictors. This approach aligns with our commitment to ethical data practices and ensures our model contributes to fair and equitable educational financing.
+
+## Conclusions
 
 
